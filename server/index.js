@@ -1,10 +1,12 @@
 const express = require('express');
 const fs = require('fs');
+const morgan = require('morgan');
 
 const imagePath = process.env.IMAGE_PATH;
 const imageTypes = ['gif', 'jpg', 'png', 'jpeg'];
 
 const app = express();
+app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   fs.readdir(imagePath, (err, files) => {
