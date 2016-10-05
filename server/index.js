@@ -4,8 +4,8 @@ const morgan = require('morgan');
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 
-const FileList = require('../lib/FileList');
 const getFiles = require('./getFiles');
+const App = require('../lib/App');
 
 if (!process.env.IMAGE_PATH) { throw new Error('IMAGE_PATH must be defined'); }
 const imagePath = process.env.IMAGE_PATH;
@@ -18,11 +18,7 @@ app.get('/', (req, res) => {
     console.log('err', err);
 
     res.set('Content-Type', 'text/html');
-    res.send(
-      ReactDOMServer.renderToStaticMarkup(
-        React.createElement(FileList, {files})
-      )
-    );
+    res.send(ReactDOMServer.renderToStaticMarkup(App(files)))
   });
 });
 
