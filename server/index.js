@@ -14,17 +14,16 @@ const app = express();
 app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
-  getFiles(imagePath, (err, files) => {
-    console.log('err', err);
-
-    renderReact(files, reactHtml => {
-      renderTemplate('index', {react: reactHtml}, (err, markup) => {
-        console.log('err', err);
-        res.set('Content-Type', 'text/html');
-        res.send(markup);
-      });
+  getFiles(imagePath)
+    .then(files => renderReact(files))
+    .then(partial => renderTemplate('index', {reactOutput: partial}))
+    .then(html => {
+      res.set('Content-Type', 'text/html');
+      res.send(html);
+    })
+    .catch(err => {
+      res.status(500).send(err.toString());
     });
-  });
 });
 
 const port = process.env.PORT || 5678;
