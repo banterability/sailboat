@@ -2,7 +2,9 @@ const express = require('express');
 const fs = require('fs');
 const morgan = require('morgan');
 
+if (!process.env.IMAGE_PATH) { throw new Error('IMAGE_PATH must be defined'); }
 const imagePath = process.env.IMAGE_PATH;
+
 const imageTypes = ['gif', 'jpg', 'png', 'jpeg'];
 
 const app = express();
