@@ -4,6 +4,7 @@ const morgan = require('morgan');
 
 const getFiles = require('./getFiles');
 const App = require('../lib/App');
+const renderTemplate = require('./renderTemplate');
 const renderReact = require('./renderReact');
 
 if (!process.env.IMAGE_PATH) { throw new Error('IMAGE_PATH must be defined'); }
@@ -17,8 +18,11 @@ app.get('/', (req, res) => {
     console.log('err', err);
 
     renderReact(files, reactHtml => {
-      res.set('Content-Type', 'text/html');
-      res.send(reactHtml);
+      renderTemplate('index', {react: reactHtml}, (err, markup) => {
+        console.log('err', err);
+        res.set('Content-Type', 'text/html');
+        res.send(markup);
+      });
     });
   });
 });
