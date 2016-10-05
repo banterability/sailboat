@@ -8,6 +8,7 @@ _Fair GIFs and following PNGs_
 
 | Name         | Description                      |
 | ------------ | -------------------------------- |
+| `BASE_URL`   | Domain to prepend to links       |
 | `IMAGE_PATH` | Directory to read files from     |
 | `PORT`       | Server port (defaults to `5678`) |
 

@@ -15,7 +15,10 @@ app.use(morgan('dev'));
 
 app.get('/', (req, res) => {
   getFiles(imagePath)
-    .then(files => renderReact(files))
+    .then(files => renderReact({
+      baseUrl: process.env.BASE_URL,
+      files
+    }))
     .then(partial => renderTemplate('index', {reactOutput: partial}))
     .then(html => {
       res.set('Content-Type', 'text/html');
