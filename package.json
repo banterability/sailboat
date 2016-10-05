@@ -3,5 +3,9 @@
   "version": "1.0.0",
   "description": "Fair GIFs and following PNGs",
   "author": "Jeff Long <hello@banterability.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "main": "server/index.js",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
 }
