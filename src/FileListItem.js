@@ -1,13 +1,13 @@
-const React = require('react');
+import React from 'react';
 
 const FileListItem = props => {
   const {filename} = props;
 
-  return React.createElement('li', null, filename);
+  return <li>{filename}</li>;
 };
 
 FileListItem.propTypes = {
   filename: React.PropTypes.string.isRequired
 };
 
-module.exports = FileListItem;
+export default FileListItem;

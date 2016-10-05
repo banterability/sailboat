@@ -1,18 +1,13 @@
-const React = require('react');
+import React from 'react';
 
-const FileListItem = require('./FileListItem');
+import FileListItem from './FileListItem';
 
-class FileList extends React.PureComponent {
+export default class FileList extends React.PureComponent {
   render() {
-    return React.createElement('ul', null,
-      this.props.files.map((filename, index) => {
-        return React.createElement(FileListItem, {
-          filename,
-          key: index
-        });
-      })
-    );
+    return <ul>
+      {this.props.files.map((filename, index) => {
+        return <FileListItem filename={filename} key={index}/>
+      })}
+    </ul>;
   }
 }
-
-module.exports = FileList;
