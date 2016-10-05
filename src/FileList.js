@@ -2,12 +2,32 @@ import React from 'react';
 
 import FileListItem from './FileListItem';
 
-export default class FileList extends React.PureComponent {
+class FileList extends React.PureComponent {
   render() {
-    return <ul>
-      {this.props.files.map((filename, index) => {
-        return <FileListItem filename={filename} key={index}/>
-      })}
-    </ul>;
+    const {baseUrl, files} = this.props;
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.props.files.map((file, index) => {
+            return <FileListItem baseUrl={baseUrl} file={file} key={index}/>
+          })}
+        </tbody>
+      </table>
+    );
   }
 }
+
+FileList.propTypes = {
+  baseUrl: React.PropTypes.string,
+  files: React.PropTypes.array.isRequired
+}
+
+export default FileList;

@@ -1,5 +1,7 @@
 const fs = require('fs');
 
+const getFile = require('./getFile');
+
 const imageTypes = ['gif', 'jpg', 'png', 'jpeg'];
 
 module.exports = directory => new Promise((resolve, reject) => {
@@ -7,19 +9,12 @@ module.exports = directory => new Promise((resolve, reject) => {
     if (err) {
       reject(err);
     } else {
-      const results = files.reduce((memo, filename) => {
-        imageTypes.includes(filename.split('.')[1])
-          ? memo.shown.push(filename)
-          : memo.hidden.push(filename);
+      const imageFiles = files.filter(filename => imageTypes.includes(filename.split('.')[1]))
+        .map(filename => getFile(filename, directory));
 
-        return memo;
-      }, {
-        hidden: [],
-        shown: []
-      });
-
-      console.log(`Hiding ${results.hidden.length} non-image files`);
-      resolve(results.shown);
+      Promise.all(imageFiles)
+        .then(results => resolve(results))
+        .catch(err => reject(err));
     }
   })
 })
