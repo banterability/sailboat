@@ -7,7 +7,7 @@ module.exports = (filename, directory) => new Promise((resolve, reject) => {
       reject(err);
     } else {
       resolve({
-        createdAt: stats.birthtime,
+        createdAt: stats.birthtime.toJSON(),
         name: filename,
         size: fileSize(stats.size, {
           round: 1,
