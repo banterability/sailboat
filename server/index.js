@@ -12,6 +12,7 @@ const imagePath = process.env.IMAGE_PATH;
 
 const app = express();
 app.use(morgan('dev'));
+app.use('/assets', express.static('client/lib'));
 
 app.get('/', (req, res) => {
   getFiles(imagePath)
