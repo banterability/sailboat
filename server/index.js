@@ -19,7 +19,10 @@ app.get('/', (req, res) => {
       baseUrl: process.env.BASE_URL,
       files
     }))
-    .then(partial => renderTemplate('index', {reactOutput: partial}))
+    .then(({markup, state}) => renderTemplate('index', {
+      reactOutput: markup,
+      reactState: JSON.stringify(state)
+    }))
     .then(html => {
       res.set('Content-Type', 'text/html');
       res.send(html);
